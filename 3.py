@@ -21,13 +21,10 @@ def part1(rucksack_list):
     result = 0
 
     for r in rucksack_list:
-        c1 = list(r[:len(r)//2])
-        c2 = list(r[len(r)//2:])
+        c1 = set(r[:len(r)//2])
+        c2 = set(r[len(r)//2:])
 
-        c1 = list(set(c1))
-        c2 = list(set(c2))
-
-        repeated = Counter(c1 + c2).most_common(1)[0][0]
+        repeated = list(c1 & c2)[0]
 
         result += _get_priority(repeated)
 
