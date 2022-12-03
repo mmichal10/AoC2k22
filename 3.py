@@ -1,6 +1,7 @@
-#!/usr/bin/python3.10
+#!/usr/bin/python3
 
 from collections import Counter
+from itertools import islice
 
 with open('3.input') as f:
     rucksacks = f.read()
@@ -32,4 +33,24 @@ def part1(rucksack_list):
 
     return result
 
-print(f"Result 1 {part1(rucksack_gen)}")
+def part2(rucksack_list):
+    result = 0
+
+    while True:
+        try:
+            first, second, third = islice(rucksack_list, 3)
+        except ValueError:
+            break
+
+        first = set(first)
+        second = set(second)
+        third = set(third)
+
+        badge = list(first & second & third)[0]
+
+        result += _get_priority(badge)
+
+    return result
+
+print(f"Result 1 {part1(rucksack_list)}")
+print(f"Result 2 {part2(rucksack_gen)}")
