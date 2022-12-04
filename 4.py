@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import re
 
 with open('4.input') as f:
     cleaning = f.read()
@@ -10,13 +11,8 @@ result1 = 0
 result2 = 0
 
 for c in cleaning_list:
-    e1, e2 = c.split(',')
-
-    e1_min, e1_max = e1.split('-')
-    e1_min, e1_max = int(e1_min), int(e1_max)
-
-    e2_min, e2_max = e2.split('-')
-    e2_min, e2_max = int(e2_min), int(e2_max)
+    ranges = re.findall(r"(\d+)-(\d+),(\d+)-(\d+)", c)[0]
+    e1_min, e1_max, e2_min, e2_max = [int(v) for v in ranges]
 
     if (e1_max < e2_min or e2_max < e1_min):
         continue
